@@ -79,6 +79,7 @@ namespace WebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
+            items.DateCreated = DateTime.Now;
             db.Items.Add(items);
             db.SaveChanges();
 

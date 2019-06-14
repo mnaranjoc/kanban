@@ -10,15 +10,15 @@ namespace kanban.Models
     {
         public int ID { get; set; }
 
-        [Display(Name = "Descripción")]
+        [Display(Name = "Description")]
         [Required]
         public string Description { get; set; }
 
         [DataType(DataType.Date)]
-        [Display(Name = "Fecha creación")]
+        [Display(Name = "Created date")]
         public DateTime DateCreated { get; set; }
 
-        [Display(Name = "Columna")]
+        [Display(Name = "Column")]
         public int Column { get; set; }
 
     }

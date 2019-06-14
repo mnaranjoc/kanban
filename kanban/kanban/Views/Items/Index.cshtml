@@ -1,58 +1,79 @@
 ﻿@model IEnumerable<kanban.Models.Item>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Tasks";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title @ViewBag.Progress%</h2>
+
+<div class="progress">
+    <div class="progress-bar" role="progressbar" aria-valuenow=@ViewBag.Progress aria-valuemin="0" aria-valuemax="100" style="width: @ViewBag.Progress%;">
+    </div>
+</div>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 
-<table class="table">
-    <tr><th>To do</th></tr>
-    @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.Todo)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-            </td>
-        </tr>
-    }
+<div class="panel panel-danger">
+    <!-- Default panel contents -->
+    <div class="panel-heading">To do (@ViewBag.TodoCounter)</div>
+    <!-- Table -->
+    <table class="table">
+        @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.Todo)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
 
-    <tr><th><br>In Process</th></tr>
-    @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.InProcess)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-            </td>
-        </tr>
-    }
+<div class="panel panel-warning">
+    <!-- Default panel contents -->
+    <div class="panel-heading">In process (@ViewBag.InProcessCounter)</div>
+    <!-- Table -->
+    <table class="table">
+        @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.InProcess)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
 
-    <tr><th><br>Finished</th></tr>
-    @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.Finished)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-            </td>
-        </tr>
-    }
-</table>
+<div class="panel panel-success">
+    <!-- Default panel contents -->
+    <div class="panel-heading">Finished (@ViewBag.FinishedCounter)</span></div>
+    <!-- Table -->
+    <table class="table">
+        @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.Finished)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
+    </table>
+</div>

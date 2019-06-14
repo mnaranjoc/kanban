@@ -17,13 +17,20 @@ namespace kanban.Views
             HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("Items").Result;
             IEnumerable<Item> itemList = response.Content.ReadAsAsync<IEnumerable<Item>>().Result;
 
-            IEnumerable<Item> toDo      = itemList.Where(x => x.Column == 0);
-            IEnumerable<Item> inProcess = itemList.Where(x => x.Column == 1);
-            IEnumerable<Item> finished  = itemList.Where(x => x.Column == 2);
+            IEnumerable<Item> toDo      = itemList.Where(x => x.Column == 0).OrderByDescending(x => x.DateCreated);
+            IEnumerable<Item> inProcess = itemList.Where(x => x.Column == 1).OrderByDescending(x => x.DateCreated);
+            IEnumerable<Item> finished  = itemList.Where(x => x.Column == 2).OrderByDescending(x => x.DateCreated);
 
-            ViewBag.Todo      = toDo;
+            // Lists
+            ViewBag.Todo = toDo;
             ViewBag.InProcess = inProcess;
-            ViewBag.Finished  = finished;
+            ViewBag.Finished = finished;
+
+            // Counters
+            ViewBag.TodoCounter = toDo.Count();
+            ViewBag.InProcessCounter = inProcess.Count();
+            ViewBag.FinishedCounter = finished.Count();
+            ViewBag.Progress = (finished.Count() * 100) / (toDo.Count() + inProcess.Count() + finished.Count());
 
             return View(itemList.ToList());
         }
