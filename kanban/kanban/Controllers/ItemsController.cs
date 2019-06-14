@@ -17,6 +17,14 @@ namespace kanban.Views
             HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("Items").Result;
             IEnumerable<Item> itemList = response.Content.ReadAsAsync<IEnumerable<Item>>().Result;
 
+            IEnumerable<Item> toDo      = itemList.Where(x => x.Column == 0);
+            IEnumerable<Item> inProcess = itemList.Where(x => x.Column == 1);
+            IEnumerable<Item> finished  = itemList.Where(x => x.Column == 2);
+
+            ViewBag.Todo      = toDo;
+            ViewBag.InProcess = inProcess;
+            ViewBag.Finished  = finished;
+
             return View(itemList.ToList());
         }
 
