@@ -1,23 +1,23 @@
-﻿using System;
+﻿using kanban.Models;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
+using System.Net.Http;
 using System.Web.Mvc;
-using kanban.Models;
 
 namespace kanban.Views
 {
     public class ItemsController : Controller
     {
-        private KanbanDbContext db = new KanbanDbContext();
+        //private KanbanDbContext db = new KanbanDbContext();
 
         // GET: Items
         public ActionResult Index()
         {
-            return View(db.Items.ToList());
+            HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("Items").Result;
+            IEnumerable<Item> itemList = response.Content.ReadAsAsync<IEnumerable<Item>>().Result;
+
+            return View(itemList.ToList());
         }
 
         // GET: Items/Details/5
@@ -27,7 +27,8 @@ namespace kanban.Views
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Item item = db.Items.Find(id);
+            HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("Items\\"+id).Result;
+            Item item = response.Content.ReadAsAsync<Item>().Result;
             if (item == null)
             {
                 return HttpNotFound();
@@ -50,8 +51,7 @@ namespace kanban.Views
         {
             if (ModelState.IsValid)
             {
-                db.Items.Add(item);
-                db.SaveChanges();
+                HttpResponseMessage response = GlobalVariables.WebApiClient.PostAsJsonAsync("Items\\Create", item).Result;
                 return RedirectToAction("Index");
             }
 
@@ -65,7 +65,8 @@ namespace kanban.Views
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Item item = db.Items.Find(id);
+            HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("Items\\" + id).Result;
+            Item item = response.Content.ReadAsAsync<Item>().Result;
             if (item == null)
             {
                 return HttpNotFound();
@@ -82,8 +83,7 @@ namespace kanban.Views
         {
             if (ModelState.IsValid)
             {
-                db.Entry(item).State = EntityState.Modified;
-                db.SaveChanges();
+                HttpResponseMessage response = GlobalVariables.WebApiClient.PutAsJsonAsync("Items\\"+item.ID, item).Result;
                 return RedirectToAction("Index");
             }
             return View(item);
@@ -96,7 +96,8 @@ namespace kanban.Views
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Item item = db.Items.Find(id);
+            HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("Items\\" + id).Result;
+            Item item = response.Content.ReadAsAsync<Item>().Result;
             if (item == null)
             {
                 return HttpNotFound();
@@ -109,19 +110,17 @@ namespace kanban.Views
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Item item = db.Items.Find(id);
-            db.Items.Remove(item);
-            db.SaveChanges();
+            HttpResponseMessage response = GlobalVariables.WebApiClient.DeleteAsync("Items\\" + id).Result;
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
+        /*protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }*/
     }
 }
