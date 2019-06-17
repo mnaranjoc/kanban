@@ -68,6 +68,11 @@ namespace kanban.Views
         // GET: Items/Create
         public ActionResult Create()
         {
+            HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("Columns").Result;
+            IEnumerable<Column> columnList = response.Content.ReadAsAsync<IEnumerable<Column>>().Result;
+
+            ViewBag.ColumnDrop = columnList.Select(x => new SelectListItem { Text = x.Description, Value = x.ID.ToString() }).ToList();
+
             return View();
         }
 

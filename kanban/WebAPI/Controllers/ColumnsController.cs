@@ -12,44 +12,44 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    public class ItemsController : ApiController
+    public class ColumnsController : ApiController
     {
         private Entities db = new Entities();
 
-        // GET: api/Items
-        public IQueryable<Items> GetItems()
+        // GET: api/Columns
+        public IQueryable<Columns> GetColumns()
         {
-            return db.Items;
+            return db.Columns;
         }
 
-        // GET: api/Items/5
-        [ResponseType(typeof(Items))]
-        public IHttpActionResult GetItems(int id)
+        // GET: api/Columns/5
+        [ResponseType(typeof(Columns))]
+        public IHttpActionResult GetColumns(int id)
         {
-            Items items = db.Items.Find(id);
-            if (items == null)
+            Columns columns = db.Columns.Find(id);
+            if (columns == null)
             {
                 return NotFound();
             }
 
-            return Ok(items);
+            return Ok(columns);
         }
 
-        // PUT: api/Items/5
+        // PUT: api/Columns/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutItems(int id, Items items)
+        public IHttpActionResult PutColumns(int id, Columns columns)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != items.ID)
+            if (id != columns.ID)
             {
                 return BadRequest();
             }
 
-            db.Entry(items).State = EntityState.Modified;
+            db.Entry(columns).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace WebAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ItemsExists(id))
+                if (!ColumnsExists(id))
                 {
                     return NotFound();
                 }
@@ -70,35 +70,35 @@ namespace WebAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Items
-        [ResponseType(typeof(Items))]
-        public IHttpActionResult PostItems(Items items)
+        // POST: api/Columns
+        [ResponseType(typeof(Columns))]
+        public IHttpActionResult PostColumns(Columns columns)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Items.Add(items);
+            db.Columns.Add(columns);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = items.ID }, items);
+            return CreatedAtRoute("DefaultApi", new { id = columns.ID }, columns);
         }
 
-        // DELETE: api/Items/5
-        [ResponseType(typeof(Items))]
-        public IHttpActionResult DeleteItems(int id)
+        // DELETE: api/Columns/5
+        [ResponseType(typeof(Columns))]
+        public IHttpActionResult DeleteColumns(int id)
         {
-            Items items = db.Items.Find(id);
-            if (items == null)
+            Columns columns = db.Columns.Find(id);
+            if (columns == null)
             {
                 return NotFound();
             }
 
-            db.Items.Remove(items);
+            db.Columns.Remove(columns);
             db.SaveChanges();
 
-            return Ok(items);
+            return Ok(columns);
         }
 
         protected override void Dispose(bool disposing)
@@ -110,9 +110,9 @@ namespace WebAPI.Controllers
             base.Dispose(disposing);
         }
 
-        private bool ItemsExists(int id)
+        private bool ColumnsExists(int id)
         {
-            return db.Items.Count(e => e.ID == id) > 0;
+            return db.Columns.Count(e => e.ID == id) > 0;
         }
     }
 }

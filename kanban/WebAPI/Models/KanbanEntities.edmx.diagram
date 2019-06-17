@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="07168441d62b478bac00ee95039b525e" Name="Diagram1">
+      <Diagram DiagramId="126bc3f8c73b4002a81a20ce66e6cedb" Name="Diagram1">
         <EntityTypeShape EntityType="kanban.Models.KanbanDbContextModel.Columns" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="kanban.Models.KanbanDbContextModel.Items" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
         <AssociationConnector Association="kanban.Models.KanbanDbContextModel.FK_dbo_Items_dbo_Columns_ColumnID" ManuallyRouted="false" />

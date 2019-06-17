@@ -24,10 +24,18 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Column, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DateCreated, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Column, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Column, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.DateCreated, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DateCreated, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ColumnID, "ColumnID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ColumnID", (List<SelectListItem>)ViewBag.ColumnDrop, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ColumnID, "", new { @class = "text-danger" })
             </div>
         </div>
 
