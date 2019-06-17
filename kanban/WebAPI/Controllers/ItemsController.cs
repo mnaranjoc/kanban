@@ -74,6 +74,8 @@ namespace WebAPI.Controllers
         [ResponseType(typeof(Items))]
         public IHttpActionResult PostItems(Items items)
         {
+            items.DateCreated = DateTime.Now;
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

@@ -24,9 +24,9 @@ namespace kanban.Views
             {
                 itemList = response.Content.ReadAsAsync<IEnumerable<Item>>().Result;
 
-                toDo = itemList.Where(x => x.ColumnID == 0).OrderByDescending(x => x.DateCreated);
-                inProcess = itemList.Where(x => x.ColumnID == 1).OrderByDescending(x => x.DateCreated);
-                finished = itemList.Where(x => x.ColumnID == 2).OrderByDescending(x => x.DateCreated);
+                toDo = itemList.Where(x => x.ColumnID == 1).OrderByDescending(x => x.DateCreated);
+                inProcess = itemList.Where(x => x.ColumnID == 2).OrderByDescending(x => x.DateCreated);
+                finished = itemList.Where(x => x.ColumnID == 3).OrderByDescending(x => x.DateCreated);
             }
 
             // Lists
@@ -81,7 +81,7 @@ namespace kanban.Views
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Description,DateCreated,Column")] Item item)
+        public ActionResult Create([Bind(Include = "ID,Description,DateCreated,ColumnID")] Item item)
         {
             if (ModelState.IsValid)
             {
@@ -105,6 +105,12 @@ namespace kanban.Views
             {
                 return HttpNotFound();
             }
+
+            response = GlobalVariables.WebApiClient.GetAsync("Columns").Result;
+            IEnumerable<Column> columnList = response.Content.ReadAsAsync<IEnumerable<Column>>().Result;
+
+            ViewBag.ColumnDrop = columnList.Select(x => new SelectListItem { Text = x.Description, Value = x.ID.ToString() }).ToList();
+            
             return View(item);
         }
 
@@ -113,7 +119,7 @@ namespace kanban.Views
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Description,DateCreated,Column")] Item item)
+        public ActionResult Edit([Bind(Include = "ID,Description,DateCreated,ColumnID")] Item item)
         {
             if (ModelState.IsValid)
             {
