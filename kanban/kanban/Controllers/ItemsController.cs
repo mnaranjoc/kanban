@@ -15,11 +15,19 @@ namespace kanban.Views
         public ActionResult Index()
         {
             HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("Items").Result;
-            IEnumerable<Item> itemList = response.Content.ReadAsAsync<IEnumerable<Item>>().Result;
+            IEnumerable<Item> itemList = Enumerable.Empty<Item>(),
+                              toDo = Enumerable.Empty<Item>(),
+                              inProcess = Enumerable.Empty<Item>(),
+                              finished = Enumerable.Empty<Item>();
 
-            IEnumerable<Item> toDo      = itemList.Where(x => x.Column == 0).OrderByDescending(x => x.DateCreated);
-            IEnumerable<Item> inProcess = itemList.Where(x => x.Column == 1).OrderByDescending(x => x.DateCreated);
-            IEnumerable<Item> finished  = itemList.Where(x => x.Column == 2).OrderByDescending(x => x.DateCreated);
+            if (response.IsSuccessStatusCode)
+            {
+                itemList = response.Content.ReadAsAsync<IEnumerable<Item>>().Result;
+
+                toDo = itemList.Where(x => x.ColumnID == 0).OrderByDescending(x => x.DateCreated);
+                inProcess = itemList.Where(x => x.ColumnID == 1).OrderByDescending(x => x.DateCreated);
+                finished = itemList.Where(x => x.ColumnID == 2).OrderByDescending(x => x.DateCreated);
+            }
 
             // Lists
             ViewBag.Todo = toDo;
@@ -30,7 +38,13 @@ namespace kanban.Views
             ViewBag.TodoCounter = toDo.Count();
             ViewBag.InProcessCounter = inProcess.Count();
             ViewBag.FinishedCounter = finished.Count();
-            ViewBag.Progress = (finished.Count() * 100) / (toDo.Count() + inProcess.Count() + finished.Count());
+
+            int up = finished.Count() * 100,
+                down = toDo.Count() + inProcess.Count() + finished.Count();
+
+            int res = (down > 1) ? up / down : 0;
+
+            ViewBag.Progress = res;
 
             return View(itemList.ToList());
         }
@@ -42,7 +56,7 @@ namespace kanban.Views
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("Items\\"+id).Result;
+            HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("Items\\" + id).Result;
             Item item = response.Content.ReadAsAsync<Item>().Result;
             if (item == null)
             {
@@ -98,7 +112,7 @@ namespace kanban.Views
         {
             if (ModelState.IsValid)
             {
-                HttpResponseMessage response = GlobalVariables.WebApiClient.PutAsJsonAsync("Items\\"+item.ID, item).Result;
+                HttpResponseMessage response = GlobalVariables.WebApiClient.PutAsJsonAsync("Items\\" + item.ID, item).Result;
                 return RedirectToAction("Index");
             }
             return View(item);

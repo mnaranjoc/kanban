@@ -25,6 +25,7 @@ namespace WebAPI.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Columns> Columns { get; set; }
         public virtual DbSet<Items> Items { get; set; }
     }
 }

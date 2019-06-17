@@ -9,5 +9,6 @@ namespace kanban.Models
     public class KanbanDbContext : DbContext
     {
         public DbSet<Item> Items { get; set; }
+        public DbSet<Column> Columns { get; set; }
     }
 }

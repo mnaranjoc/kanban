@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace kanban.Models
 {
@@ -19,7 +16,8 @@ namespace kanban.Models
         public DateTime DateCreated { get; set; }
 
         [Display(Name = "Column")]
-        public int Column { get; set; }
+        public int ColumnID { get; set; }
 
+        public virtual Column Column { get; set; }
     }
 }

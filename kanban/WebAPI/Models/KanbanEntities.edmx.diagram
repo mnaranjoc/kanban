@@ -4,8 +4,10 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cf49992a71de4876a1f9b7d1935c08f5" Name="Diagram1">
-        <EntityTypeShape EntityType="kanban.Models.KanbanDbContextModel.Items" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="07168441d62b478bac00ee95039b525e" Name="Diagram1">
+        <EntityTypeShape EntityType="kanban.Models.KanbanDbContextModel.Columns" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="kanban.Models.KanbanDbContextModel.Items" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="kanban.Models.KanbanDbContextModel.FK_dbo_Items_dbo_Columns_ColumnID" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
