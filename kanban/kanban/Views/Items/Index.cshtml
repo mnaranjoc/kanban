@@ -22,7 +22,7 @@
     <table class="table">
         @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.Todo)
         {
-            <tr>
+            <tr class="shadowed-danger">
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
@@ -45,7 +45,7 @@
     <table class="table">
         @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.InProcess)
         {
-            <tr>
+            <tr class="shadowed-warning">
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
@@ -68,7 +68,7 @@
     <table class="table">
         @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.Finished)
         {
-            <tr>
+            <tr class="shadowed-success">
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>

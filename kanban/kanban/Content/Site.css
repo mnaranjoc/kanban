@@ -22,3 +22,14 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.shadowed-danger:hover{
+    background-color: #f2dede;
+}
+.shadowed-success:hover{
+    background-color: #dff0d8;
+}
+.shadowed-warning:hover
+{
+    background-color: #fcf8e3;
+}
