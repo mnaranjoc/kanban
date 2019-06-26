@@ -12,12 +12,19 @@
 </div>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <div class="text-right">
+        <small>
+            @Html.ActionLink("Create New", "Create")
+        </small>
+    </div>
 </p>
 
 <div class="panel panel-danger">
     <!-- Default panel contents -->
-    <div class="panel-heading">To do (@ViewBag.TodoCounter)</div>
+
+    
+
+    <div class="panel-heading"><strong>To do (@ViewBag.TodoCounter)</strong></div>
     <!-- Table -->
     <table class="table">
         @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.Todo)
@@ -29,9 +36,11 @@
                 </td>
                 <td>
                     <div class="text-right">
-                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        <small>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        </small>
                     </div>
                 </td>
             </tr>
@@ -41,7 +50,7 @@
 
 <div class="panel panel-warning">
     <!-- Default panel contents -->
-    <div class="panel-heading">In process (@ViewBag.InProcessCounter)</div>
+    <div class="panel-heading"><strong>In process (@ViewBag.InProcessCounter)</strong></div>
     <!-- Table -->
     <table class="table">
         @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.InProcess)
@@ -53,9 +62,11 @@
                 </td>
                 <td>
                     <div class="text-right">
-                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        <small>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        </small>
                     </div>
                 </td>
             </tr>
@@ -65,7 +76,7 @@
 
 <div class="panel panel-success">
     <!-- Default panel contents -->
-    <div class="panel-heading">Finished (@ViewBag.FinishedCounter)</span></div>
+    <div class="panel-heading"><strong>Finished (@ViewBag.FinishedCounter)</strong></div>
     <!-- Table -->
     <table class="table">
         @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.Finished)
@@ -77,9 +88,11 @@
                 </td>
                 <td>
                     <div class="text-right">
-                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        <small>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        </small>
                     </div>
                 </td>
             </tr>
