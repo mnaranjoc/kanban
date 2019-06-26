@@ -19,5 +19,10 @@ namespace kanban.Models
         public int ColumnID { get; set; }
 
         public virtual Column Column { get; set; }
+
+        public int daysElapsed()
+        {
+            return (int)Math.Round((DateTime.Now - DateCreated).TotalDays);
+        }
     }
 }

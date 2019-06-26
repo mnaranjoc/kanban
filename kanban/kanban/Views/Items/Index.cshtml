@@ -25,6 +25,7 @@
             <tr class="shadowed-danger">
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
+                    <small>(@item.daysElapsed() days ago)</small>
                 </td>
                 <td>
                     <div class="text-right">
@@ -48,6 +49,7 @@
             <tr class="shadowed-warning">
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
+                    <small>(@item.daysElapsed() days ago)</small>
                 </td>
                 <td>
                     <div class="text-right">
@@ -71,6 +73,7 @@
             <tr class="shadowed-success">
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
+                    <small>(@item.daysElapsed() days ago)</small>
                 </td>
                 <td>
                     <div class="text-right">
