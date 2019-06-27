@@ -24,5 +24,17 @@ namespace kanban.Models
         {
             return (int)Math.Round((DateTime.Now - DateCreated).TotalDays);
         }
+
+        public string shortDescription()
+        {
+            if (Description.Length >= 57)
+            {
+                return String.Format("{0}...", Description.Substring(0, 57));
+            }
+            else
+            {
+                return Description;
+            }
+        }
     }
 }

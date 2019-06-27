@@ -21,9 +21,6 @@
 
 <div class="panel panel-danger">
     <!-- Default panel contents -->
-
-    
-
     <div class="panel-heading"><strong>To do (@ViewBag.TodoCounter)</strong></div>
     <!-- Table -->
     <table class="table">
@@ -31,7 +28,7 @@
         {
             <tr class="shadowed-danger">
                 <td>
-                    @Html.DisplayFor(modelItem => item.Description)
+                    @item.shortDescription()
                     <small>(@item.daysElapsed() days ago)</small>
                 </td>
                 <td>
@@ -57,7 +54,7 @@
         {
             <tr class="shadowed-warning">
                 <td>
-                    @Html.DisplayFor(modelItem => item.Description)
+                    @item.shortDescription()
                     <small>(@item.daysElapsed() days ago)</small>
                 </td>
                 <td>
@@ -83,7 +80,7 @@
         {
             <tr class="shadowed-success">
                 <td>
-                    @Html.DisplayFor(modelItem => item.Description)
+                    @item.shortDescription()
                     <small>(@item.daysElapsed() days ago)</small>
                 </td>
                 <td>
