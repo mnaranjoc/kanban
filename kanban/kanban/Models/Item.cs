@@ -20,9 +20,25 @@ namespace kanban.Models
 
         public virtual Column Column { get; set; }
 
-        public int daysElapsed()
+        public string daysElapsed()
         {
-            return (int)Math.Round((DateTime.Now - DateCreated).TotalDays);
+            int days = (int)Math.Round((DateTime.Now - DateCreated).TotalDays);
+
+            if (days < 0)
+            {
+                return "#ERROR";
+            }
+            else
+            {
+                if (days == 0)
+                    return "created today";
+                else if (days == 1)
+                    return String.Format("created {0} day ago", days);
+                else
+                    return String.Format("created {0} days ago", days);
+            }
+
+            return "";
         }
 
         public string shortDescription()
