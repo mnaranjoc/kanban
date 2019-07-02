@@ -10,7 +10,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Item</h4>
         <hr />
@@ -38,6 +38,13 @@
             <div class="col-md-10">
                 @Html.DropDownList("ColumnID", (List<SelectListItem>)ViewBag.ColumnDrop, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ColumnID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Critical", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 editor-for">
+                @Html.CheckBox("Critical", Model.Critical, new { @class = "tickbox-single-line" })
             </div>
         </div>
 
