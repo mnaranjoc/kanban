@@ -18,6 +18,9 @@ namespace kanban.Models
         [Display(Name = "Column")]
         public int ColumnID { get; set; }
 
+        [Display(Name = "Critical")]
+        public Boolean Critical { get; set; }
+
         public virtual Column Column { get; set; }
 
         public string daysElapsed()

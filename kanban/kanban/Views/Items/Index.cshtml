@@ -27,10 +27,14 @@
         @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.Todo)
         {
             <tr class="shadowed-danger">
-                <td>
-                    @item.shortDescription()
-                    <small>(@item.daysElapsed())</small>
-                </td>
+                @if (item.Critical == true)
+                {
+                    <td><b>@item.shortDescription()</b><small> (@item.daysElapsed())</small></td>
+                }
+                else
+                {
+                    <td>@item.shortDescription()<small> (@item.daysElapsed())</small></td>
+                }
                 <td>
                     <div class="text-right">
                         <small>
@@ -53,10 +57,14 @@
         @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.InProcess)
         {
             <tr class="shadowed-warning">
-                <td>
-                    @item.shortDescription()
-                    <small>(@item.daysElapsed())</small>
-                </td>
+                @if (item.Critical == true)
+                {
+                    <td><b>@item.shortDescription()</b><small> (@item.daysElapsed())</small></td>
+                }
+                else
+                {
+                    <td>@item.shortDescription()<small> (@item.daysElapsed())</small></td>
+                }
                 <td>
                     <div class="text-right">
                         <small>
@@ -79,10 +87,14 @@
         @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.Finished)
         {
             <tr class="shadowed-success">
-                <td>
-                    @item.shortDescription()
-                    <small>(@item.daysElapsed())</small>
-                </td>
+                @if (item.Critical == true)
+                {
+                    <td><b>@item.shortDescription()</b><small> (@item.daysElapsed())</small></td>
+                }
+                else
+                {
+                    <td>@item.shortDescription()<small> (@item.daysElapsed())</small></td>
+                }
                 <td>
                     <div class="text-right">
                         <small>

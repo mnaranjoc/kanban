@@ -18,6 +18,7 @@ namespace WebAPI.Models
         public string Description { get; set; }
         public System.DateTime DateCreated { get; set; }
         public int ColumnID { get; set; }
+        public bool Critical { get; set; }
     
         public virtual Columns Columns { get; set; }
     }
