@@ -81,7 +81,7 @@ namespace kanban.Views
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Description,DateCreated,ColumnID")] Item item)
+        public ActionResult Create([Bind(Include = "ID,Description,DateCreated,ColumnID,Critical")] Item item)
         {
             if (ModelState.IsValid)
             {

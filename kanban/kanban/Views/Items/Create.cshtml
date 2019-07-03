@@ -33,8 +33,8 @@
 
         <div class="form-group">
             @Html.Label("Critical", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10 editor-for">
-                @Html.CheckBox("Critical", Model.Critical, new { @class = "tickbox-single-line" })
+            <div class="col-md-10">
+                @Html.CheckBoxFor(model => model.Critical, new { @class = "tickbox-single-line" })
             </div>
         </div>
 
