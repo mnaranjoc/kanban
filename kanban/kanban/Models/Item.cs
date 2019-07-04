@@ -25,25 +25,19 @@ namespace kanban.Models
 
         public string daysElapsed()
         {
-            string ret = "";
-
-            int days = (int)Math.Round((DateTime.Now - DateCreated).TotalDays);
-
-            if (days < 0)
-            {
-                ret = "#ERROR";
+            if (DateTime.Now.Date <= DateCreated.Date)
+            {                
+                return "created today"; // Days <= 0
             }
             else
             {
-                if (days == 0)
-                    ret = "created today";
-                else if (days == 1)
-                    ret = String.Format("created {0} day ago", days);
+                int days = (int)Math.Round((DateTime.Now - DateCreated).TotalDays);
+                
+                if (days == 1)
+                    return String.Format("created {0} day ago", days); // Days == 0                
                 else
-                    ret = String.Format("created {0} days ago", days);
+                    return String.Format("created {0} days ago", days); // Days > 1
             }
-
-            return ret;
         }
 
         public string shortDescription()
