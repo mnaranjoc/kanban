@@ -19,92 +19,95 @@
     </div>
 </p>
 
-<div class="panel panel-danger">
-    <!-- Default panel contents -->
-    <div class="panel-heading"><strong>To do (@ViewBag.TodoCounter)</strong></div>
-    <!-- Table -->
-    <table class="table">
-        @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.Todo)
-        {
-            <tr class="shadowed-danger">
-                @if (item.Critical == true)
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel panel-danger">
+            <!-- Default panel contents -->
+            <div class="panel-heading"><strong>To do (@ViewBag.TodoCounter)</strong></div>
+            <!-- Table -->
+            <table class="table">
+                @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.Todo)
                 {
-                    <td><b>@item.shortDescription()</b><small> (@item.daysElapsed())</small></td>
+                    <tr class="shadowed-danger">
+                        @if (item.Critical == true)
+                        {
+                            <td><b>@item.shortDescription()</b><br /><small>(@item.daysElapsed())</small></td>
+                        }
+                        else
+                        {
+                            <td>@item.shortDescription()<br /><small> (@item.daysElapsed())</small></td>
+                        }
+                        <td>
+                            <div class="text-right">
+                                <small>
+                                    @Html.ActionLink("Details", "Details", new { id = item.ID })
+                                </small>
+                            </div>
+                        </td>
+                    </tr>
                 }
-                else
-                {
-                    <td>@item.shortDescription()<small> (@item.daysElapsed())</small></td>
-                }
-                <td>
-                    <div class="text-right">
-                        <small>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                        </small>
-                    </div>
-                </td>
-            </tr>
-        }
-    </table>
-</div>
+            </table>
+        </div>
+    </div>
 
-<div class="panel panel-warning">
-    <!-- Default panel contents -->
-    <div class="panel-heading"><strong>In process (@ViewBag.InProcessCounter)</strong></div>
-    <!-- Table -->
-    <table class="table">
-        @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.InProcess)
-        {
-            <tr class="shadowed-warning">
-                @if (item.Critical == true)
+    <div class="col-md-4">
+        <div class="panel panel-warning">
+            <!-- Default panel contents -->
+            <div class="panel-heading"><strong>In process (@ViewBag.InProcessCounter)</strong></div>
+            <!-- Table -->
+            <table class="table">
+                @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.InProcess)
                 {
-                    <td><b>@item.shortDescription()</b><small> (@item.daysElapsed())</small></td>
+                    <tr class="shadowed-warning">
+                        @if (item.Critical == true)
+                        {
+                            <td><b>@item.shortDescription()</b><br /><small>(@item.daysElapsed())</small></td>
+                        }
+                        else
+                        {
+                            <td>@item.shortDescription()<br /><small> (@item.daysElapsed())</small></td>
+                        }
+                        <td>
+                            <div class="text-right">
+                                <small>
+                                    @Html.ActionLink("Details", "Details", new { id = item.ID })
+                                </small>
+                            </div>
+                        </td>
+                    </tr>
                 }
-                else
-                {
-                    <td>@item.shortDescription()<small> (@item.daysElapsed())</small></td>
-                }
-                <td>
-                    <div class="text-right">
-                        <small>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                        </small>
-                    </div>
-                </td>
-            </tr>
-        }
-    </table>
-</div>
+            </table>
+        </div>
+    </div>
 
-<div class="panel panel-success">
-    <!-- Default panel contents -->
-    <div class="panel-heading"><strong>Finished (@ViewBag.FinishedCounter)</strong></div>
-    <!-- Table -->
-    <table class="table">
-        @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.Finished)
-        {
-            <tr class="shadowed-success">
-                @if (item.Critical == true)
+    <div class="col-md-4">
+        <div class="panel panel-success">
+            <!-- Default panel contents -->
+            <div class="panel-heading"><strong>Finished (@ViewBag.FinishedCounter)</strong></div>
+            <!-- Table -->
+            <table class="table">
+                @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.Finished)
                 {
-                    <td><b>@item.shortDescription()</b><small> (@item.daysElapsed())</small></td>
+                    <tr class="shadowed-success">
+                        @if (item.Critical == true)
+                        {
+                            <td><b>@item.shortDescription()</b><br /><small>(@item.daysElapsed())</small></td>
+                        }
+                        else
+                        {
+                            <td>@item.shortDescription()<br /><small> (@item.daysElapsed())</small></td>
+                        }
+                        <td>
+                            <div class="text-right">
+                                <small>
+                                    @Html.ActionLink("Details", "Details", new { id = item.ID })
+                                </small>
+                            </div>
+                        </td>
+                    </tr>
                 }
-                else
-                {
-                    <td>@item.shortDescription()<small> (@item.daysElapsed())</small></td>
-                }
-                <td>
-                    <div class="text-right">
-                        <small>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                        </small>
-                    </div>
-                </td>
-            </tr>
-        }
-    </table>
+            </table>
+        </div>
+    </div>
+
 </div>

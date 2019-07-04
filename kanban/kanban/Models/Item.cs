@@ -25,30 +25,32 @@ namespace kanban.Models
 
         public string daysElapsed()
         {
+            string ret = "";
+
             int days = (int)Math.Round((DateTime.Now - DateCreated).TotalDays);
 
             if (days < 0)
             {
-                return "#ERROR";
+                ret = "#ERROR";
             }
             else
             {
                 if (days == 0)
-                    return "created today";
+                    ret = "created today";
                 else if (days == 1)
-                    return String.Format("created {0} day ago", days);
+                    ret = String.Format("created {0} day ago", days);
                 else
-                    return String.Format("created {0} days ago", days);
+                    ret = String.Format("created {0} days ago", days);
             }
 
-            return "";
+            return ret;
         }
 
         public string shortDescription()
         {
-            if (Description.Length >= 57)
+            if (Description.Length >= 35)
             {
-                return String.Format("{0}...", Description.Substring(0, 57));
+                return String.Format("{0}...", Description.Substring(0, 35));
             }
             else
             {
