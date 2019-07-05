@@ -1,0 +1,129 @@
+﻿@*@model kanban.Models.Board
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Board</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@
+
+@model kanban.Models.Board
+
+<h2>@Model.Description - Tasks</h2>
+
+<p>
+    <small>
+        @Html.ActionLink("Create New", "Create")
+    </small>
+</p>
+
+<div class="row">
+    <div class="col-sm-4">
+        <div class="panel panel-danger">
+            <!-- Default panel contents -->
+            <div class="panel-heading"><strong>To do (@ViewBag.TodoCounter)</strong></div>
+            <!-- Table -->
+            <table class="table">
+                @foreach (var item in Model.Items.Where(m => m.ColumnID == 1))
+                {
+                    <tr class="shadowed-danger">
+                        @if (item.Critical == true)
+                        {
+                            <td><b>@item.shortDescription()</b><br /><small>(@item.daysElapsed())</small></td>
+                        }
+                        else
+                        {
+                            <td>@item.shortDescription()<br /><small> (@item.daysElapsed())</small></td>
+                        }
+                        <td>
+                            <div class="text-right">
+                                <small>
+                                    @Html.ActionLink("Details", "Details", new { id = item.ID })
+                                </small>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+        <div class="panel panel-warning">
+            <!-- Default panel contents -->
+            <div class="panel-heading"><strong>In process (@ViewBag.InProcessCounter)</strong></div>
+            <!-- Table -->
+            <table class="table">
+                @foreach (var item in Model.Items.Where(m => m.ColumnID == 2))
+                {
+                    <tr class="shadowed-warning">
+                        @if (item.Critical == true)
+                        {
+                            <td><b>@item.shortDescription()</b><br /><small>(@item.daysElapsed())</small></td>
+                        }
+                        else
+                        {
+                            <td>@item.shortDescription()<br /><small> (@item.daysElapsed())</small></td>
+                        }
+                        <td>
+                            <div class="text-right">
+                                <small>
+                                    @Html.ActionLink("Details", "Details", new { id = item.ID })
+                                </small>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+        <div class="panel panel-success">
+            <!-- Default panel contents -->
+            <div class="panel-heading"><strong>Finished (@ViewBag.FinishedCounter)</strong></div>
+            <!-- Table -->
+            <table class="table">
+                @foreach (var item in Model.Items.Where(m => m.ColumnID == 3))
+                {
+                    <tr class="shadowed-success">
+                        @if (item.Critical == true)
+                        {
+                            <td><b>@item.shortDescription()</b><br /><small>(@item.daysElapsed())</small></td>
+                        }
+                        else
+                        {
+                            <td>@item.shortDescription()<br /><small> (@item.daysElapsed())</small></td>
+                        }
+                        <td>
+                            <div class="text-right">
+                                <small>
+                                    @Html.ActionLink("Details", "Details", new { id = item.ID })
+                                </small>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+
+</div>

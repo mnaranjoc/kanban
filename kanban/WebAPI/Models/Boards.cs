@@ -12,16 +12,18 @@ namespace WebAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Items
+    public partial class Boards
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Boards()
+        {
+            this.Items = new HashSet<Items>();
+        }
+    
         public int ID { get; set; }
         public string Description { get; set; }
-        public System.DateTime DateCreated { get; set; }
-        public int ColumnID { get; set; }
-        public bool Critical { get; set; }
-        public Nullable<int> Board_ID { get; set; }
     
-        public virtual Columns Columns { get; set; }
-        public virtual Boards Boards { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Items> Items { get; set; }
     }
 }

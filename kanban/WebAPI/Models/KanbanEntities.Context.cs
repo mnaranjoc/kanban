@@ -27,5 +27,6 @@ namespace WebAPI.Models
     
         public virtual DbSet<Columns> Columns { get; set; }
         public virtual DbSet<Items> Items { get; set; }
+        public virtual DbSet<Boards> Boards { get; set; }
     }
 }

@@ -188,6 +188,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
+    <Compile Include="Controllers\BoardsController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -246,6 +247,11 @@
     <Content Include="Views\Items\Details.cshtml" />
     <Content Include="Views\Items\Edit.cshtml" />
     <Content Include="Views\Items\Index.cshtml" />
+    <Content Include="Views\Boards\Create.cshtml" />
+    <Content Include="Views\Boards\Delete.cshtml" />
+    <Content Include="Views\Boards\Details.cshtml" />
+    <Content Include="Views\Boards\Edit.cshtml" />
+    <Content Include="Views\Boards\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

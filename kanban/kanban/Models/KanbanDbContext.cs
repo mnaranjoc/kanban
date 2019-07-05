@@ -10,5 +10,7 @@ namespace kanban.Models
     {
         public DbSet<Item> Items { get; set; }
         public DbSet<Column> Columns { get; set; }
+
+        public System.Data.Entity.DbSet<kanban.Models.Board> Boards { get; set; }
     }
 }
