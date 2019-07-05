@@ -21,6 +21,8 @@ namespace kanban.Models
         [Display(Name = "Critical")]
         public Boolean Critical { get; set; }
 
+        public virtual Board Board { get; set; }
+
         public virtual Column Column { get; set; }
 
         public string daysElapsed()
