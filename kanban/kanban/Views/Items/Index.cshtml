@@ -6,13 +6,32 @@
 
 <br />
 
-<h2>@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-md-11 col-sm-12">
+        <h2>@ViewBag.Title</h2>
+    </div>
+    <div class="col-md-1 col-sm-12">
+        <br />
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Actions <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu4">
+                <li class="dropdown-header">Items</li>
+                <li>@Html.ActionLink("Create new item", "Create")</li>
+                <li role="separator" class="divider"></li>
 
-<div class="text-right">
-    <small>
-        @Html.ActionLink("Create new item", "Create")
-    </small>
+                <li class="dropdown-header">Boards</li>
+                <li><a href="#">Create new Board</a></li>
+                <li><a href="#">All items</a></li>
+                <li><a href="#">Personal</a></li>
+                <li><a href="#">Work</a></li>
+            </ul>
+        </div>
+    </div>
 </div>
+
+<br />
 
 <div class="row">
     <div class="col-sm-4">
@@ -51,31 +70,31 @@
             <div class="panel-heading"><strong>In process (@ViewBag.InProcessCounter)</strong></div>
             <!-- Table -->
             <table class="table">
-               @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.Todo)
-               {
-                <tr class="shadowed-warning">
-                    <td>
-                        <a href="/Items/Details/@item.ID">
-                            @if (item.Critical == true)
-                            {
-                                <b>@item.shortDescription()</b>
+                @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.Todo)
+                {
+                    <tr class="shadowed-warning">
+                        <td>
+                            <a href="/Items/Details/@item.ID">
+                                @if (item.Critical == true)
+                                {
+                                    <b>@item.shortDescription()</b>
 
-                            }
-                            else
-                            {
-                                @item.shortDescription()
-                            }
-                            <br />
-                            <small> (@item.daysElapsed())</small>
-                        </a>
-                    </td>
-                </tr>
-               }
+                                }
+                                else
+                                {
+                                    @item.shortDescription()
+                                }
+                                <br />
+                                <small> (@item.daysElapsed())</small>
+                            </a>
+                        </td>
+                    </tr>
+                }
             </table>
         </div>
     </div>
 
-    <div class="col-sm-4">
+    <div class="col-sm-4" style="padding-right:0;">
         <div class="panel panel-success">
             <!-- Default panel contents -->
             <div class="panel-heading"><strong>Finished (@ViewBag.FinishedCounter)</strong></div>
@@ -104,6 +123,4 @@
             </table>
         </div>
     </div>
-    <div class="col-sm-1"></div>
-
 </div>
