@@ -4,18 +4,15 @@
     ViewBag.Title = "Tasks";
 }
 
-<h2>@ViewBag.Title @ViewBag.Progress%</h2>
+<br />
 
-<div class="progress">
-    <div class="progress-bar" role="progressbar" aria-valuenow=@ViewBag.Progress aria-valuemin="0" aria-valuemax="100" style="width: @ViewBag.Progress%;">
-    </div>
+<h2>@ViewBag.Title</h2>
+
+<div class="text-right">
+    <small>
+        @Html.ActionLink("Create new item", "Create")
+    </small>
 </div>
-
-<p>
-        <small>
-            @Html.ActionLink("Create New", "Create")
-        </small>
-</p>
 
 <div class="row">
     <div class="col-sm-4">
@@ -27,20 +24,20 @@
                 @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.Todo)
                 {
                     <tr class="shadowed-danger">
-                        @if (item.Critical == true)
-                        {
-                            <td><b>@item.shortDescription()</b><br /><small>(@item.daysElapsed())</small></td>
-                        }
-                        else
-                        {
-                            <td>@item.shortDescription()<br /><small> (@item.daysElapsed())</small></td>
-                        }
                         <td>
-                            <div class="text-right">
-                                <small>
-                                    @Html.ActionLink("Details", "Details", new { id = item.ID })
-                                </small>
-                            </div>
+                            <a href="/Items/Details/@item.ID">
+                                @if (item.Critical == true)
+                                {
+                                    <b>@item.shortDescription()</b>
+
+                                }
+                                else
+                                {
+                                    @item.shortDescription()
+                                }
+                                <br />
+                                <small> (@item.daysElapsed())</small>
+                            </a>
                         </td>
                     </tr>
                 }
@@ -54,26 +51,26 @@
             <div class="panel-heading"><strong>In process (@ViewBag.InProcessCounter)</strong></div>
             <!-- Table -->
             <table class="table">
-                @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.InProcess)
-                {
-                    <tr class="shadowed-warning">
-                        @if (item.Critical == true)
-                        {
-                            <td><b>@item.shortDescription()</b><br /><small>(@item.daysElapsed())</small></td>
-                        }
-                        else
-                        {
-                            <td>@item.shortDescription()<br /><small> (@item.daysElapsed())</small></td>
-                        }
-                        <td>
-                            <div class="text-right">
-                                <small>
-                                    @Html.ActionLink("Details", "Details", new { id = item.ID })
-                                </small>
-                            </div>
-                        </td>
-                    </tr>
-                }
+               @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.Todo)
+               {
+                <tr class="shadowed-warning">
+                    <td>
+                        <a href="/Items/Details/@item.ID">
+                            @if (item.Critical == true)
+                            {
+                                <b>@item.shortDescription()</b>
+
+                            }
+                            else
+                            {
+                                @item.shortDescription()
+                            }
+                            <br />
+                            <small> (@item.daysElapsed())</small>
+                        </a>
+                    </td>
+                </tr>
+               }
             </table>
         </div>
     </div>
@@ -84,28 +81,29 @@
             <div class="panel-heading"><strong>Finished (@ViewBag.FinishedCounter)</strong></div>
             <!-- Table -->
             <table class="table">
-                @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.Finished)
+                @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.Todo)
                 {
                     <tr class="shadowed-success">
-                        @if (item.Critical == true)
-                        {
-                            <td><b>@item.shortDescription()</b><br /><small>(@item.daysElapsed())</small></td>
-                        }
-                        else
-                        {
-                            <td>@item.shortDescription()<br /><small> (@item.daysElapsed())</small></td>
-                        }
                         <td>
-                            <div class="text-right">
-                                <small>
-                                    @Html.ActionLink("Details", "Details", new { id = item.ID })
-                                </small>
-                            </div>
+                            <a href="/Items/Details/@item.ID">
+                                @if (item.Critical == true)
+                                {
+                                    <b>@item.shortDescription()</b>
+
+                                }
+                                else
+                                {
+                                    @item.shortDescription()
+                                }
+                                <br />
+                                <small> (@item.daysElapsed())</small>
+                            </a>
                         </td>
                     </tr>
                 }
             </table>
         </div>
     </div>
+    <div class="col-sm-1"></div>
 
 </div>

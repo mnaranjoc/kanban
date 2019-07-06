@@ -38,3 +38,15 @@ small
 {
     color: #A9A9A9;
 }
+
+td a{
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+
+td a:hover
+{
+    text-decoration:none;
+    color: black;
+}
