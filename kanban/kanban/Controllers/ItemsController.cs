@@ -68,8 +68,11 @@ namespace kanban.Views
         {
             HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("Columns").Result;
             IEnumerable<Column> columnList = response.Content.ReadAsAsync<IEnumerable<Column>>().Result;
-
             ViewBag.ColumnDrop = columnList.Select(x => new SelectListItem { Text = x.Description, Value = x.ID.ToString() }).ToList();
+
+            HttpResponseMessage response2 = GlobalVariables.WebApiClient.GetAsync("Boards").Result;
+            IEnumerable<Board> boardList = response2.Content.ReadAsAsync<IEnumerable<Board>>().Result;
+            ViewBag.BoardDrop = boardList.Select(x => new SelectListItem { Text = x.Description, Value = x.ID.ToString() }).ToList();
 
             return View();
         }
@@ -79,11 +82,10 @@ namespace kanban.Views
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Description,DateCreated,ColumnID,Critical")] Item item)
+        public ActionResult Create([Bind(Include = "ID,Description,DateCreated,ColumnID,Critical,BoardID")] Item item)
         {
             if (ModelState.IsValid)
             {
-                HttpResponseMessage response = GlobalVariables.WebApiClient.PostAsJsonAsync("Items\\Create", item).Result;
                 return RedirectToAction("Index");
             }
 
@@ -106,9 +108,12 @@ namespace kanban.Views
 
             response = GlobalVariables.WebApiClient.GetAsync("Columns").Result;
             IEnumerable<Column> columnList = response.Content.ReadAsAsync<IEnumerable<Column>>().Result;
-
             ViewBag.ColumnDrop = columnList.Select(x => new SelectListItem { Text = x.Description, Value = x.ID.ToString() }).ToList();
-            
+
+            HttpResponseMessage response2 = GlobalVariables.WebApiClient.GetAsync("Boards").Result;
+            IEnumerable<Board> boardList = response2.Content.ReadAsAsync<IEnumerable<Board>>().Result;
+            ViewBag.BoardDrop = boardList.Select(x => new SelectListItem { Text = x.Description, Value = x.ID.ToString() }).ToList();
+
             return View(item);
         }
 
@@ -117,7 +122,7 @@ namespace kanban.Views
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Description,DateCreated,ColumnID,Critical")] Item item)
+        public ActionResult Edit([Bind(Include = "ID,Description,DateCreated,ColumnID,Critical,BoardID")] Item item)
         {
             if (ModelState.IsValid)
             {

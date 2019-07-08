@@ -12,11 +12,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            @Html.ActionLink("My Kanban", "Index", "Items", new { id = "0" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("My Kanban", "Index", "Items", null, new { @class = "navbar-brand" })
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Home", "Index", "Items", new { id = "0" }, null)</li>
+                <li>@Html.ActionLink("Home", "Index", "Items", null, null)</li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Items<span class="caret"></span></a>
                     <ul class="dropdown-menu">
