@@ -2,8 +2,8 @@
     padding-top: 50px;
     padding-bottom: 20px;
     /*Format*/
-    background-color: #1e3252;
-    color: white;
+    background-color: #273057;
+    color: #ff6f61;
     /*Format*/
 }
 
@@ -45,7 +45,7 @@ small
 
 tr {
     /*Format*/
-    background-color: #1e3252;
+    background-color: #273057;
     /*Format*/
 }
 
@@ -54,8 +54,8 @@ td a{
     text-decoration: none;    
     /*Format*/
     /*color: black;*/
-    color: white;
-    background-color: #1e3252;
+    color: #a79b82;
+    background-color: #273057;
     /*Format*/
 }
 
@@ -64,6 +64,10 @@ td a:hover
     text-decoration:none;
     /*Format*/
     /*color: black;*/
-    color: white;
+    color: #a79b82;
     /*Format*/
+}
+
+.panel{
+    background-color: #273057;
 }

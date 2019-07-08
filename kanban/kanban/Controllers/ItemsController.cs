@@ -18,7 +18,7 @@ namespace kanban.Views
             IEnumerable<Item> itemList = Enumerable.Empty<Item>(),
                               toDo = Enumerable.Empty<Item>(),
                               inProcess = Enumerable.Empty<Item>(),
-                              finished = Enumerable.Empty<Item>();
+                              done = Enumerable.Empty<Item>();
 
             if (response.IsSuccessStatusCode)
             {
@@ -31,18 +31,18 @@ namespace kanban.Views
 
                 toDo = itemList.Where(x => x.ColumnID == 1).OrderByDescending(x => x.DateCreated);
                 inProcess = itemList.Where(x => x.ColumnID == 2).OrderByDescending(x => x.DateCreated);
-                finished = itemList.Where(x => x.ColumnID == 3).OrderByDescending(x => x.DateCreated);
+                done = itemList.Where(x => x.ColumnID == 3).OrderByDescending(x => x.DateCreated);
             }
 
             // Lists
             ViewBag.Todo = toDo;
             ViewBag.InProcess = inProcess;
-            ViewBag.Finished = finished;
+            ViewBag.Done = done;
 
             // Counters
             ViewBag.TodoCounter = toDo.Count();
             ViewBag.InProcessCounter = inProcess.Count();
-            ViewBag.FinishedCounter = finished.Count();
+            ViewBag.DoneCounter = done.Count();
 
             return View(itemList.ToList());
         }

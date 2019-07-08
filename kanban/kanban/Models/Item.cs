@@ -47,9 +47,9 @@ namespace kanban.Models
 
         public string shortDescription()
         {
-            if (Description.Length >= 35)
+            if (Description.Length >= 25)
             {
-                return String.Format("{0}...", Description.Substring(0, 35));
+                return String.Format("{0}...", Description.Substring(0, 25));
             }
             else
             {

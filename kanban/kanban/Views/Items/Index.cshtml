@@ -48,9 +48,11 @@
 
 <div class="row">
     <div class="col-sm-4">
-        <div class="panel panel-danger">
+        <div class="panel">
             <!-- Default panel contents -->
-            <div class="panel-heading"><strong>To do (@ViewBag.TodoCounter)</strong></div>
+            <div class="panel-heading">
+                <h4>To do (@ViewBag.TodoCounter)</h4>
+            </div>
             <!-- Table -->
             <table class="table">
                 @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.Todo)
@@ -78,9 +80,11 @@
     </div>
 
     <div class="col-sm-4">
-        <div class="panel panel-warning">
+        <div class="panel">
             <!-- Default panel contents -->
-            <div class="panel-heading"><strong>In process (@ViewBag.InProcessCounter)</strong></div>
+            <div class="panel-heading">
+                <h4>In process (@ViewBag.InProcessCounter)</h4>
+            </div>
             <!-- Table -->
             <table class="table">
                 @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.InProcess)
@@ -108,12 +112,14 @@
     </div>
 
     <div class="col-sm-4" style="padding-right:0;">
-        <div class="panel panel-success">
+        <div class="panel">
             <!-- Default panel contents -->
-            <div class="panel-heading"><strong>Finished (@ViewBag.FinishedCounter)</strong></div>
+            <div class="panel-heading">
+                <h4>Done (@ViewBag.DoneCounter)</h4>
+            </div>
             <!-- Table -->
             <table class="table">
-                @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.Finished)
+                @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.Done)
                 {
                     <tr>
                         <td>
