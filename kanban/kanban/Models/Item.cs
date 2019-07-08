@@ -21,6 +21,9 @@ namespace kanban.Models
         [Display(Name = "Critical")]
         public Boolean Critical { get; set; }
 
+        [Display(Name = "Board")]
+        public int BoardID { get; set; }
+
         public virtual Board Board { get; set; }
 
         public virtual Column Column { get; set; }

@@ -19,9 +19,9 @@ namespace WebAPI.Models
         public System.DateTime DateCreated { get; set; }
         public int ColumnID { get; set; }
         public bool Critical { get; set; }
-        public Nullable<int> Board_ID { get; set; }
+        public int BoardID { get; set; }
     
-        public virtual Columns Columns { get; set; }
         public virtual Boards Boards { get; set; }
+        public virtual Columns Columns { get; set; }
     }
 }

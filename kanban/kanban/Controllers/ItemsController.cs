@@ -26,7 +26,7 @@ namespace kanban.Views
 
                 if (id > 0)
                 {
-                    itemList = itemList.Where(x => x.Board.ID == id);
+                    itemList = itemList.Where(x => x.BoardID == id);
                 }
 
                 toDo = itemList.Where(x => x.ColumnID == 1).OrderByDescending(x => x.DateCreated);
