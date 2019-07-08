@@ -4,32 +4,45 @@
     ViewBag.Title = "Tasks";
 }
 
-<br />
-
-<div class="row">
-    <div class="col-md-11 col-sm-12">
-        <h2>@ViewBag.Title</h2>
-    </div>
-    <div class="col-md-1 col-sm-12">
-        <br />
-        <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                Actions <span class="caret"></span>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu4">
-                <li class="dropdown-header">Items</li>
-                <li>@Html.ActionLink("Create new item", "Create")</li>
-                <li role="separator" class="divider"></li>
-
-                <li class="dropdown-header">Boards</li>
-                <li><a href="#">Create new Board</a></li>
-                <li><a href="#">All items</a></li>
-                <li><a href="#">Personal</a></li>
-                <li><a href="#">Work</a></li>
+            @Html.ActionLink("My Kanban", "Index", "Items", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Home", "Index", "Items")</li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Items<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Create new item", "Create")</li>
+                        <li role="separator" class="divider"></li>
+                        <li>@Html.ActionLink("All items", "Index", "Items")</li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Boards<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Create new board", "Create", "Boards")</li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-header">My boards</li>
+                        <li>@Html.ActionLink("Personal", "Index", "Items", new { id = "1" }, null)</li>
+                        <li>@Html.ActionLink("Work", "Index", "Items", new { id = "2" }, null)</li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
 </div>
+
+<br />
+
+<h2>@ViewBag.Title</h2>
 
 <br />
 
@@ -70,7 +83,7 @@
             <div class="panel-heading"><strong>In process (@ViewBag.InProcessCounter)</strong></div>
             <!-- Table -->
             <table class="table">
-                @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.Todo)
+                @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.InProcess)
                 {
                     <tr class="shadowed-warning">
                         <td>
@@ -100,7 +113,7 @@
             <div class="panel-heading"><strong>Finished (@ViewBag.FinishedCounter)</strong></div>
             <!-- Table -->
             <table class="table">
-                @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.Todo)
+                @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.Finished)
                 {
                     <tr class="shadowed-success">
                         <td>

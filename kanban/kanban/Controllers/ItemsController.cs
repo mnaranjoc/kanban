@@ -12,7 +12,7 @@ namespace kanban.Views
         //private KanbanDbContext db = new KanbanDbContext();
 
         // GET: Items
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
             HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("Items").Result;
             IEnumerable<Item> itemList = Enumerable.Empty<Item>(),
@@ -23,6 +23,11 @@ namespace kanban.Views
             if (response.IsSuccessStatusCode)
             {
                 itemList = response.Content.ReadAsAsync<IEnumerable<Item>>().Result;
+
+                if (id > 0)
+                {
+                    itemList = itemList.Where(x => x.Board.ID == id);
+                }
 
                 toDo = itemList.Where(x => x.ColumnID == 1).OrderByDescending(x => x.DateCreated);
                 inProcess = itemList.Where(x => x.ColumnID == 2).OrderByDescending(x => x.DateCreated);
@@ -38,13 +43,6 @@ namespace kanban.Views
             ViewBag.TodoCounter = toDo.Count();
             ViewBag.InProcessCounter = inProcess.Count();
             ViewBag.FinishedCounter = finished.Count();
-
-            int up = finished.Count() * 100,
-                down = toDo.Count() + inProcess.Count() + finished.Count();
-
-            int res = (down > 1) ? up / down : 0;
-
-            ViewBag.Progress = res;
 
             return View(itemList.ToList());
         }
