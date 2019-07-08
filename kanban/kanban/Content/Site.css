@@ -1,6 +1,10 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    /*Format*/
+    background-color: #1e3252;
+    color: white;
+    /*Format*/
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -39,14 +43,27 @@ small
     color: #A9A9A9;
 }
 
+tr {
+    /*Format*/
+    background-color: #1e3252;
+    /*Format*/
+}
+
 td a{
     display: block;
-    text-decoration: none;
-    color: black;
+    text-decoration: none;    
+    /*Format*/
+    /*color: black;*/
+    color: white;
+    background-color: #1e3252;
+    /*Format*/
 }
 
 td a:hover
 {
     text-decoration:none;
-    color: black;
+    /*Format*/
+    /*color: black;*/
+    color: white;
+    /*Format*/
 }

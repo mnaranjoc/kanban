@@ -55,7 +55,7 @@
             <table class="table">
                 @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.Todo)
                 {
-                    <tr class="shadowed-danger">
+                    <tr>
                         <td>
                             <a href="/Items/Details/@item.ID">
                                 @if (item.Critical == true)
@@ -85,7 +85,7 @@
             <table class="table">
                 @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.InProcess)
                 {
-                    <tr class="shadowed-warning">
+                    <tr>
                         <td>
                             <a href="/Items/Details/@item.ID">
                                 @if (item.Critical == true)
@@ -115,7 +115,7 @@
             <table class="table">
                 @foreach (var item in (IEnumerable<kanban.Models.Item>)ViewBag.Finished)
                 {
-                    <tr class="shadowed-success">
+                    <tr>
                         <td>
                             <a href="/Items/Details/@item.ID">
                                 @if (item.Critical == true)
