@@ -14,37 +14,50 @@ namespace kanban.Views
         // GET: Items
         public ActionResult Index(int? id)
         {
-            HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("Items").Result;
-            IEnumerable<Item> itemList = Enumerable.Empty<Item>(),
-                              toDo = Enumerable.Empty<Item>(),
-                              inProcess = Enumerable.Empty<Item>(),
-                              done = Enumerable.Empty<Item>();
-
-            if (response.IsSuccessStatusCode)
+            using (HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("Items").Result)
             {
-                itemList = response.Content.ReadAsAsync<IEnumerable<Item>>().Result;
+                IEnumerable<Item> itemList = Enumerable.Empty<Item>(),
+                                  toDo = Enumerable.Empty<Item>(),
+                                  inProcess = Enumerable.Empty<Item>(),
+                                  done = Enumerable.Empty<Item>();
 
-                if (id > 0)
+                if (response.IsSuccessStatusCode)
                 {
-                    itemList = itemList.Where(x => x.BoardID == id);
+                    itemList = response.Content.ReadAsAsync<IEnumerable<Item>>().Result;
+
+                    if (id > 0)
+                    {
+                        itemList = itemList.Where(x => x.BoardID == id);
+                    }
+
+                    toDo = itemList.Where(x => x.ColumnID == 1).OrderByDescending(x => x.DateCreated);
+                    inProcess = itemList.Where(x => x.ColumnID == 2).OrderByDescending(x => x.DateCreated);
+                    done = itemList.Where(x => x.ColumnID == 3).OrderByDescending(x => x.DateCreated);
                 }
 
-                toDo = itemList.Where(x => x.ColumnID == 1).OrderByDescending(x => x.DateCreated);
-                inProcess = itemList.Where(x => x.ColumnID == 2).OrderByDescending(x => x.DateCreated);
-                done = itemList.Where(x => x.ColumnID == 3).OrderByDescending(x => x.DateCreated);
+                // Lists
+                ViewBag.Todo = toDo;
+                ViewBag.InProcess = inProcess;
+                ViewBag.Done = done;
+
+                // Counters
+                ViewBag.TodoCounter = toDo.Count();
+                ViewBag.InProcessCounter = inProcess.Count();
+                ViewBag.DoneCounter = done.Count();
             }
 
-            // Lists
-            ViewBag.Todo = toDo;
-            ViewBag.InProcess = inProcess;
-            ViewBag.Done = done;
+            // Boards menu
+            using (HttpResponseMessage boardsResponse = GlobalVariables.WebApiClient.GetAsync("Boards").Result)
+            {
+                if (boardsResponse.IsSuccessStatusCode)
+                {
+                    IEnumerable<Board> boardsList = boardsResponse.Content.ReadAsAsync<IEnumerable<Board>>().Result;
 
-            // Counters
-            ViewBag.TodoCounter = toDo.Count();
-            ViewBag.InProcessCounter = inProcess.Count();
-            ViewBag.DoneCounter = done.Count();
+                    ViewBag.BoardsDrop = boardsList;
+                }
+            }
 
-            return View(itemList.ToList());
+            return View();
         }
 
         // GET: Items/Details/5

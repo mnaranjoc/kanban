@@ -1,4 +1,5 @@
-﻿@model IEnumerable<kanban.Models.Item>
+﻿@using kanban.Models;
+@model IEnumerable<kanban.Models.Item>
 
 @{
     ViewBag.Title = "Tasks";
@@ -31,8 +32,10 @@
                         <li>@Html.ActionLink("Create new board", "Create", "Boards")</li>
                         <li role="separator" class="divider"></li>
                         <li class="dropdown-header">My boards</li>
-                        <li>@Html.ActionLink("Personal", "Index", "Items", new { id = "1" }, null)</li>
-                        <li>@Html.ActionLink("Work", "Index", "Items", new { id = "2" }, null)</li>
+                        @foreach (Board item in ViewBag.BoardsDrop)
+                        {
+                            <li>@Html.ActionLink(item.Description, "Index", "Items", new { id = item.ID }, null)</li>
+                        }
                     </ul>
                 </li>
             </ul>
