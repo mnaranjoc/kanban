@@ -86,7 +86,8 @@ namespace kanban.Views
         {
             if (ModelState.IsValid)
             {
-                return RedirectToAction("Index");
+                HttpResponseMessage response = GlobalVariables.WebApiClient.PostAsJsonAsync("Items\\Create", item).Result;
+                return RedirectToAction("Index\\" + item.BoardID);
             }
 
             return View(item);
