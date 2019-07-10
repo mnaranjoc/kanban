@@ -167,8 +167,14 @@ namespace kanban.Views
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            // Get the board id
+            HttpResponseMessage itemresponse = GlobalVariables.WebApiClient.GetAsync("Items\\" + id).Result;
+            Item item = itemresponse.Content.ReadAsAsync<Item>().Result;
+
+            // Delete the item
             HttpResponseMessage response = GlobalVariables.WebApiClient.DeleteAsync("Items\\" + id).Result;
-            return RedirectToAction("Index");
+
+            return RedirectToAction("Index\\" + item.BoardID);
         }
 
         /*protected override void Dispose(bool disposing)
