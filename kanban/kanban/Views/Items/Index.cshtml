@@ -54,7 +54,7 @@
         <div class="panel">
             <!-- Default panel contents -->
             <div class="panel-heading">
-                <h4>To do (@ViewBag.TodoCounter)</h4>
+                <h4 class="dropelement" draggable="true">To do (@ViewBag.TodoCounter)</h4>
             </div>
             <!-- Table -->
             <table class="table">
@@ -62,7 +62,7 @@
                 {
                     <tr>
                         <td>
-                            <a href="/Items/Details/@item.ID" class="todo" draggable="true">
+                            <a href="/Items/Details/@item.ID" class="dragelement" draggable="true">
                                 @if (item.Critical == true)
                                 {
                                     <b>@item.shortDescription()</b>
